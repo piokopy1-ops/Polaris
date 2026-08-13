@@ -24,10 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Prepare site
+        shell: bash
         run: |
-          rm -rf site
-          mkdir site
-          unzip -q Polaris_Wiedzmin3_COMPLETE_RC4_PL_EN.zip -d site
+          mkdir -p site
+          cp index.html index-en.html manifest.json service-worker.js site/
           touch site/.nojekyll
       - name: Setup Pages
         uses: actions/configure-pages@v5
