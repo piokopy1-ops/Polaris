@@ -1,0 +1,19 @@
+POLARIS — TEST 15 MINUT
+
+1. Ustaw tryb „Pierwsze przejście”.
+2. Ustaw region Novigrad.
+3. Otwórz „Teraz” i oceń, czy w 5 sekund wiesz gdzie kliknąć.
+4. Znajdź Full Crew w Osiągnięciach i sprawdź oznaczenie missable.
+5. Przejdź do Gwinta i znajdź kartę Geralt of Rivia.
+6. Filtruj karty „W tej lokacji”.
+7. Otwórz strategię walki dla widm.
+8. Dodaj własny marker na mapie.
+9. Odhacz osiągnięcie i kilka kart, odśwież stronę — progres ma zostać.
+10. Wyeksportuj zapis i raport testera.
+
+KRYTERIA
+- do 5 kliknięć do konkretnej odpowiedzi,
+- 30 sekund maksymalnie na znalezienie pomocy,
+- brak niepotrzebnej fabuły,
+- czytelność na telefonie,
+- realne poczucie oszczędności czasu.
