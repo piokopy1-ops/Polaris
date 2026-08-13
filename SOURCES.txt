@@ -1,0 +1,12 @@
+Dane produktu zostały połączone z dwóch wcześniejszych, zweryfikowanych modułów projektu Polaris:
+
+1. Polaris_Wiedzmin_3_PELNY_PRODUKT.zip
+   - 78 osiągnięć Complete Edition / 2000 GS
+   - wybrane strategie missable
+   - źródła: XboxAchievements, TrueAchievements, PlayStationTrophies, PowerPyx (weryfikowane wcześniej w projekcie).
+
+2. Polaris_Wiedzmin3_Gwent_RC1.zip
+   - 254 pozycje kart/kopii: 199 Base Game + 12 Hearts of Stone + 43 Blood and Wine
+   - źródła i lokalizacje kart z publicznych checklist: game-checklists.com, gwentchecklist.com, Witcher Wiki (weryfikowane wcześniej w projekcie).
+
+W Complete RC2 nie użyto oryginalnych grafik kart ani mapy gry.

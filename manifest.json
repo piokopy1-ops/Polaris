@@ -1,0 +1,9 @@
+{
+  "name": "Polaris — The Witcher 3 Companion",
+  "short_name": "Polaris",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080a08",
+  "theme_color": "#0b0d0b",
+  "icons": []
+}

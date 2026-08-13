@@ -23,43 +23,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Rebuild Polaris package
+      - name: Prepare static site
+        shell: bash
         run: |
-          cat \
-            .payload/part00 \
-            .payload/part01 \
-            .payload/part02 \
-            .payload/part03 \
-            .payload/part04 \
-            .payload/part05 \
-            .payload/part06 \
-            .payload/part07 \
-            .payload/part08 \
-            .payload/part09 \
-            .payload/part10 \
-            .payload/part11 \
-            .payload/part12 \
-            .payload/part13 \
-            .payload/part14 \
-            > /tmp/polaris.b64
-          base64 -d /tmp/polaris.b64 > /tmp/polaris.zip
-          unzip -t /tmp/polaris.zip
-          rm -rf site
-          mkdir site
-          unzip -q /tmp/polaris.zip -d site
+          mkdir -p site
+          cp index.html index-en.html manifest.json service-worker.js site/
           touch site/.nojekyll
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
-
       - name: Deploy to Pages
         id: deployment
         uses: actions/deploy-pages@v4
