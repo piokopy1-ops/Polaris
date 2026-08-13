@@ -1,0 +1,1 @@
+const C='polaris-rc2';const A=['./','./index.html','./index-en.html','./manifest.json'];self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(A))));self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));
