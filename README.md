@@ -13,7 +13,14 @@ Obie strony używają wspólnego klucza `localStorage` (`polaris-complete-rc3`),
 
 GitHub Actions publikuje statyczne pliki bezpośrednio z repozytorium przez GitHub Pages. Deployment nie zależy od archiwum ZIP ani podzielonego payloadu.
 
-Publikowane pliki: `index.html`, `index-en.html`, `manifest.json` i `service-worker.js`.
+Publikowane pliki: `index.html`, `index-en.html`, `alerts.html`, `overlay.html`, `manifest.json` i `service-worker.js`.
+
+## Polaris Alert dla OBS
+
+- `alerts.html` — panel sterowania przeznaczony także do użycia jako własny dok przeglądarki w OBS
+- `overlay.html` — przezroczysta nakładka Browser Source (zalecany rozmiar 1920 × 1080)
+
+Panel i nakładka komunikują się lokalnie przez `BroadcastChannel` oraz zdarzenia `localStorage`. Dzięki temu nie wymagają konta, serwera ani płatnej usługi. Oba adresy muszą być otwarte w tej samej instancji OBS.
 
 ## Dokumentacja
 

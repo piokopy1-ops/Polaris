@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0d0b">
+  <title>Polaris Alert — panel sterowania</title>
+  <style>
+    :root{--bg:#080a08;--panel:#151914;--text:#eee9dd;--muted:#93998f;--gold:#c99b3e;--border:#343a31;--red:#c75f62;--green:#77b47c}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 82% 0,#3b2a19 0,#10140f 35%,var(--bg) 75%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.app{max-width:760px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font:900 27px Georgia,serif}.brand span{color:var(--gold)}a{color:#e0bd65}.card{background:linear-gradient(145deg,#171b16,#10130f);border:1px solid var(--border);border-radius:15px;padding:16px;margin:12px 0;box-shadow:0 18px 50px #0006}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{width:100%;padding:11px;border:1px solid var(--border);border-radius:9px;background:#0b0e0b;color:var(--text);font:inherit;margin-top:7px}.primary,.secondary{width:100%;padding:12px;border-radius:9px;font:inherit;font-weight:800;cursor:pointer}.primary{border:0;background:var(--gold);color:#17130a}.secondary{border:1px solid var(--border);background:#151914;color:var(--text)}.status{border-left:3px solid var(--green);padding:9px 11px;background:#102015;border-radius:7px}.warning{border-left-color:var(--red);background:#211012}.steps{padding-left:20px}.steps li{margin:8px 0}.preview{min-height:82px;border:1px dashed #5a513e;border-radius:10px;padding:12px}.lang button{background:#151914;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 9px;cursor:pointer}.lang button.active{border-color:var(--gold)}@media(max-width:560px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body><main class="app">
+  <header class="top"><div class="brand">✦ <span>POLARIS ALERT</span></div><div class="lang"><button id="plBtn" class="active" onclick="setLang('pl')">PL</button> <button id="enBtn" onclick="setLang('en')">EN</button></div></header>
+  <p><a href="index.html" id="back">← Wróć do Polaris</a></p>
+  <section class="card">
+    <h1 id="title">Panel alertów do OBS</h1>
+    <p class="muted" id="intro">Dodaj ten panel jako własny dok w OBS. Alert pojawi się na przezroczystej nakładce w prawym górnym rogu nagrania.</p>
+    <div id="connection" class="status">● Gotowe — lokalne połączenie z nakładką OBS</div>
+  </section>
+  <section class="card">
+    <label id="typeLabel" for="alertType">Typ ostrzeżenia</label>
+    <select id="alertType" class="field"><option value="missable">⚠ Osiągnięcie do pominięcia</option><option value="choice">◆ Ważny wybór</option><option value="collectible">✦ Przedmiot / karta w pobliżu</option><option value="save">▣ Zrób zapis gry</option><option value="tip">i Wskazówka Polaris</option></select>
+    <label id="headlineLabel" for="headline">Nagłówek</label><input id="headline" class="field" maxlength="72" value="Uwaga — możesz to pominąć">
+    <label id="messageLabel" for="message">Krótka wiadomość</label><textarea id="message" class="field" rows="3" maxlength="180">Zrób ręczny zapis przed kontynuowaniem zadania.</textarea>
+    <label id="durationLabel" for="duration">Czas na ekranie</label><select id="duration" class="field"><option value="5000">5 sekund</option><option value="8000" selected>8 sekund</option><option value="12000">12 sekund</option><option value="0">Do ręcznego ukrycia</option></select>
+    <div class="grid" style="margin-top:12px"><button class="primary" id="showBtn" onclick="sendAlert()">▶ Pokaż alert</button><button class="secondary" id="hideBtn" onclick="hideAlert()">Ukryj alert</button></div>
+    <button class="secondary" id="soundBtn" style="margin-top:10px" onclick="testSound()">♪ Test dźwięku</button>
+  </section>
+  <section class="card"><h2 id="previewTitle">Podgląd treści</h2><div class="preview"><b id="previewHeadline"></b><div class="muted" id="previewMessage"></div></div></section>
+  <section class="card"><h2 id="setupTitle">Konfiguracja w OBS</h2><ol class="steps" id="setupSteps"><li>W OBS wybierz <b>Doki → Własne doki przeglądarki</b> i wklej adres tej strony.</li><li>Dodaj źródło <b>Przeglądarka</b> i wklej adres <a href="overlay.html" target="_blank">overlay.html</a>.</li><li>Ustaw rozmiar źródła na <b>1920 × 1080</b>. Tło pozostanie przezroczyste.</li><li>Panel i źródło muszą być otwarte w tej samej aplikacji OBS.</li></ol><p class="status warning" id="xboxNote">Xbox nie pozwala zwykłej aplikacji internetowej rysować bezpośrednio na ekranie gry. Alert będzie widoczny w OBS i na gotowym filmie, nie na telewizorze podłączonym tylko do konsoli.</p></section>
+</main><script>
+const CHANNEL='polaris-alert-v1';const channel='BroadcastChannel'in window?new BroadcastChannel(CHANNEL):null;let lang=localStorage.getItem('polaris-alert-lang')||'pl';
+const copy={pl:{back:'← Wróć do Polaris',title:'Panel alertów do OBS',intro:'Dodaj ten panel jako własny dok w OBS. Alert pojawi się na przezroczystej nakładce w prawym górnym rogu nagrania.',ready:'● Gotowe — lokalne połączenie z nakładką OBS',type:'Typ ostrzeżenia',headline:'Nagłówek',message:'Krótka wiadomość',duration:'Czas na ekranie',show:'▶ Pokaż alert',hide:'Ukryj alert',sound:'♪ Test dźwięku',preview:'Podgląd treści',setup:'Konfiguracja w OBS',backHref:'index.html'},en:{back:'← Back to Polaris',title:'OBS alert control panel',intro:'Add this page as a custom OBS browser dock. Alerts appear on the transparent overlay in the top-right corner of the recording.',ready:'● Ready — local connection to the OBS overlay',type:'Alert type',headline:'Headline',message:'Short message',duration:'Time on screen',show:'▶ Show alert',hide:'Hide alert',sound:'♪ Test sound',preview:'Content preview',setup:'OBS setup',backHref:'index-en.html'}};
+function setLang(next){lang=next;localStorage.setItem('polaris-alert-lang',lang);const c=copy[lang];for(const [id,key] of [['back','back'],['title','title'],['intro','intro'],['connection','ready'],['typeLabel','type'],['headlineLabel','headline'],['messageLabel','message'],['durationLabel','duration'],['showBtn','show'],['hideBtn','hide'],['soundBtn','sound'],['previewTitle','preview'],['setupTitle','setup']])document.getElementById(id).textContent=c[key];document.getElementById('back').href=c.backHref;document.getElementById('plBtn').classList.toggle('active',lang==='pl');document.getElementById('enBtn').classList.toggle('active',lang==='en')}
+function payload(action='show'){return{action,type:document.getElementById('alertType').value,headline:document.getElementById('headline').value.trim(),message:document.getElementById('message').value.trim(),duration:Number(document.getElementById('duration').value),id:Date.now()}}
+function publish(data){localStorage.setItem(CHANNEL,JSON.stringify(data));if(channel)channel.postMessage(data)}
+function sendAlert(){const data=payload();if(!data.headline)return document.getElementById('headline').focus();publish(data);playTone()}
+function hideAlert(){publish(payload('hide'))}
+function playTone(){const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)return;const ctx=new AudioContext(),gain=ctx.createGain(),osc=ctx.createOscillator();osc.type='sine';osc.frequency.setValueAtTime(660,ctx.currentTime);osc.frequency.setValueAtTime(880,ctx.currentTime+.12);gain.gain.setValueAtTime(.0001,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.22,ctx.currentTime+.02);gain.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.38);osc.connect(gain).connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+.4)}function testSound(){playTone()}
+function preview(){document.getElementById('previewHeadline').textContent=document.getElementById('headline').value;document.getElementById('previewMessage').textContent=document.getElementById('message').value}document.getElementById('headline').addEventListener('input',preview);document.getElementById('message').addEventListener('input',preview);window.addEventListener('storage',e=>{if(e.key===CHANNEL)document.getElementById('connection').classList.remove('warning')});setLang(lang);preview();
+</script></body></html>
