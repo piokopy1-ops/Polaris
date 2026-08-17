@@ -21,6 +21,8 @@ Publikowane pliki: `index.html`, `index-en.html`, `alerts.html`, `overlay.html`,
 - `overlay.html` — przezroczysta nakładka Browser Source (zalecany rozmiar 1920 × 1080)
 - `polaris-hotkeys.lua` — opcjonalny skrypt OBS dodający globalne skróty do pięciu akcji nakładki
 
+Każdy typ alertu ma osobny sygnał dźwiękowy. Aby operator słyszał go podczas gry, dla źródła Polaris należy wybrać w OBS `Zaawansowane właściwości dźwięku → Monitorowanie dźwięku → Monitorowanie i wyjście`.
+
 Panel i nakładka komunikują się lokalnie przez `BroadcastChannel` oraz zdarzenia `localStorage`. Dzięki temu nie wymagają konta, serwera ani płatnej usługi. Oba adresy muszą być otwarte w tej samej instancji OBS.
 
 ## Dokumentacja
