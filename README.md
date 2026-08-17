@@ -19,6 +19,7 @@ Publikowane pliki: `index.html`, `index-en.html`, `alerts.html`, `overlay.html`,
 
 - `alerts.html` — panel sterowania przeznaczony także do użycia jako własny dok przeglądarki w OBS
 - `overlay.html` — przezroczysta nakładka Browser Source (zalecany rozmiar 1920 × 1080)
+- `polaris-hotkeys.lua` — opcjonalny skrypt OBS dodający globalne skróty do pięciu akcji nakładki
 
 Panel i nakładka komunikują się lokalnie przez `BroadcastChannel` oraz zdarzenia `localStorage`. Dzięki temu nie wymagają konta, serwera ani płatnej usługi. Oba adresy muszą być otwarte w tej samej instancji OBS.
 
