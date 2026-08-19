@@ -27,7 +27,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p site
-          cp index.html index-en.html alerts.html overlay.html polaris-hotkeys.lua manifest.json service-worker.js site/
+          cp index.html index-en.html session.html alerts.html overlay.html polaris-hotkeys.lua manifest.json service-worker.js site/
           touch site/.nojekyll
       - name: Setup Pages
         uses: actions/configure-pages@v5

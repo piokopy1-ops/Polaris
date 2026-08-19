@@ -17,3 +17,20 @@ KRYTERIA
 - brak niepotrzebnej fabuły,
 - czytelność na telefonie,
 - realne poczucie oszczędności czasu.
+
+POLARIS — TEST SESJI NA TELEFONIE
+
+1. Otwórz session.html na telefonie i wybierz „Test telefonu — bez gry”.
+2. Uruchom test dźwięku. Ustaw głośność tak, by sygnał był słyszalny obok telewizora.
+3. Sprawdź próbny alert i przycisk ukrywający rozwiązanie.
+4. Rozpocznij sesję, potwierdź oba punkty kontrolne i oceń, czy alert da się zauważyć bez ciągłego patrzenia na telefon.
+5. Zapisz raport, skopiuj go i sprawdź, czy zawiera osobno wynik osiągnięcia oraz ocenę alertu.
+6. Dopiero potem wykonaj test „Duch Lasu” na koncie, na którym osiągnięcie nie jest zdobyte.
+
+KRYTERIA SESJI
+- najwyżej dwa sięgnięcia po telefon przed alertem,
+- wyraźne oznaczenie, że prototyp jest sterowany ręcznie,
+- alert zauważalny mimo braku wibracji na iPhonie,
+- spoiler niewidoczny bez świadomego kliknięcia,
+- ekran nie wygasza się albo aplikacja jasno ostrzega, że nie może temu zapobiec,
+- raport rozdziela: „czy osiągnięcie zdobyte?” od „czy alert był dobry?”.
