@@ -13,7 +13,19 @@ Obie strony używają wspólnego klucza `localStorage` (`polaris-complete-rc3`),
 
 GitHub Actions publikuje statyczne pliki bezpośrednio z repozytorium przez GitHub Pages. Deployment nie zależy od archiwum ZIP ani podzielonego payloadu.
 
-Publikowane pliki: `index.html`, `index-en.html`, `alerts.html`, `overlay.html`, `manifest.json` i `service-worker.js`.
+Publikowane pliki: `index.html`, `index-en.html`, `session.html`, `alerts.html`, `overlay.html`, `manifest.json` i `service-worker.js`.
+
+## Mobilna sesja gry — prototyp 0.1
+
+- `session.html` — telefoniczny tryb testowy do używania obok Xboxa
+- maksymalnie dwa ręczne punkty kontrolne w zadaniu
+- alert dźwiękowy i pełnoekranowy; wibracja tylko na urządzeniach, które ją obsługują
+- opcjonalna blokada wygaszania ekranu przez Screen Wake Lock API
+- treść rozwiązania ukryta pod przyciskiem ostrzegającym o spoilerze
+- osobny zapis wyniku osiągnięcia i opinii o momencie alertu
+- raport przechowywany lokalnie i gotowy do skopiowania lub udostępnienia
+
+Prototyp jest jawnie oznaczony jako ręczny: nie rozpoznaje jeszcze obrazu z Xboxa. Scenariusz „Duch Lasu” pozostaje roboczy do czasu potwierdzenia warunku i momentu ostrzeżenia na prawdziwym nagraniu.
 
 ## Polaris Alert dla OBS
 

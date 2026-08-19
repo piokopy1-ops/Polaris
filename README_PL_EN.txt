@@ -21,6 +21,9 @@ Wersja zawiera:
 - lokalny autosave,
 - eksport/import progresu,
 - raport testera,
+- mobilną sesję gry z dwoma ręcznymi punktami kontrolnymi,
+- dźwiękowy i pełnoekranowy alert na telefonie,
+- osobny raport wyniku osiągnięcia i jakości alertu,
 - działanie offline po wdrożeniu na HTTPS.
 
 EN
@@ -44,6 +47,9 @@ Included:
 - local autosave,
 - progress export/import,
 - tester report,
+- mobile game sessions with two manual checkpoints,
+- phone sound and full-screen warnings,
+- separate achievement-result and alert-quality reporting,
 - offline support after deployment over HTTPS.
 
 IMPORTANT
