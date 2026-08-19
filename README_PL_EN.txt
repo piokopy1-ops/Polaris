@@ -23,6 +23,8 @@ Wersja zawiera:
 - raport testera,
 - mobilną sesję gry z dwoma ręcznymi punktami kontrolnymi,
 - dźwiękowy i pełnoekranowy alert na telefonie,
+- test alertu manual-v0.2 z jednoznacznym komunikatem bez gry,
+- raport rozdzielający ustawienia telefonu, obsługę urządzenia i odpowiedzi testera,
 - osobny raport wyniku osiągnięcia i jakości alertu,
 - działanie offline po wdrożeniu na HTTPS.
 
@@ -49,6 +51,8 @@ Included:
 - tester report,
 - mobile game sessions with two manual checkpoints,
 - phone sound and full-screen warnings,
+- manual-v0.2 alert test with an unambiguous no-game message,
+- reporting that separates phone settings, device support, and tester observations,
 - separate achievement-result and alert-quality reporting,
 - offline support after deployment over HTTPS.
 
