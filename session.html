@@ -21,7 +21,7 @@
 
   <section id="setupView">
     <div class="card">
-      <div class="eyebrow" id="setupEyebrow">Wersja testowa 0.1</div>
+      <div class="eyebrow" id="setupEyebrow">Wersja testowa 0.2</div>
       <h1 id="setupTitle">Telefon pilnuje momentu. Ty grasz.</h1>
       <p class="muted" id="setupIntro">Wybierz zadanie, zostaw tę stronę otwartą obok siebie i potwierdź maksymalnie dwa punkty kontrolne. Polaris ostrzeże Cię dźwiękiem i wyraźnym ekranem.</p>
       <div class="badges"><span class="badge danger" id="manualBadge">RĘCZNY PROTOTYP</span><span class="badge" id="phoneBadge">TELEFON OBOK GRACZA</span></div>
@@ -85,20 +85,47 @@
       <p class="muted" id="resultIntro">Zapisujemy dwie osobne rzeczy: wynik w grze oraz opinię o samym alercie. Dzięki temu nie pomylimy błędu aplikacji z błędnym warunkiem osiągnięcia.</p>
     </div>
     <form id="resultForm" class="card" onsubmit="saveReport(event)">
-      <h2 id="achievementQuestion">1. Czy osiągnięcie się odblokowało?</h2>
-      <div class="result-options">
-        <label class="choice"><input type="radio" name="achievement" value="yes" required><span id="achYes">Tak</span></label>
-        <label class="choice"><input type="radio" name="achievement" value="no"><span id="achNo">Nie</span></label>
-        <label class="choice"><input type="radio" name="achievement" value="unknown"><span id="achUnknown">Jeszcze nie wiem</span></label>
-        <label class="choice"><input type="radio" name="achievement" value="na"><span id="achNa">Nie dotyczy — test techniczny</span></label>
+      <div id="phoneResultQuestions" class="hidden">
+        <h2 id="phoneSoundQuestion">1. Czy usłyszałeś dźwięk alertu?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="heardSound" value="yes"><span id="soundHeardYes">Tak</span></label>
+          <label class="choice"><input type="radio" name="heardSound" value="no"><span id="soundHeardNo">Nie — mimo że był włączony</span></label>
+          <label class="choice"><input type="radio" name="heardSound" value="off"><span id="soundHeardOff">Nie testowano — dźwięk wyłączony</span></label>
+        </div>
+        <h2 style="margin-top:22px" id="phoneClarityQuestion">2. Czy od razu było jasne, że to tylko test?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="understoodTest" value="yes"><span id="understoodTestYes">Tak</span></label>
+          <label class="choice"><input type="radio" name="understoodTest" value="no"><span id="understoodTestNo">Nie</span></label>
+        </div>
+        <h2 style="margin-top:22px" id="phoneNextActionQuestion">3. Czy wiedziałeś, co zrobić dalej?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="knewNextAction" value="yes"><span id="nextActionYes">Tak</span></label>
+          <label class="choice"><input type="radio" name="knewNextAction" value="no"><span id="nextActionNo">Nie</span></label>
+        </div>
+        <h2 style="margin-top:22px" id="phoneVibrationQuestion">4. Czy telefon zawibrował?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="vibrationObserved" value="yes"><span id="vibrationObservedYes">Tak</span></label>
+          <label class="choice"><input type="radio" name="vibrationObserved" value="no"><span id="vibrationObservedNo">Nie — mimo że była włączona</span></label>
+          <label class="choice"><input type="radio" name="vibrationObserved" value="off"><span id="vibrationObservedOff">Nie testowano — wyłączona</span></label>
+          <label class="choice"><input type="radio" name="vibrationObserved" value="unavailable"><span id="vibrationObservedUnavailable">Niedostępna na tym urządzeniu</span></label>
+        </div>
       </div>
-      <h2 style="margin-top:22px" id="timingQuestion">2. Jak zadziałał alert?</h2>
-      <div class="result-options">
-        <label class="choice"><input type="radio" name="timing" value="right" required><span id="timingRight">Trafił w moment</span></label>
-        <label class="choice"><input type="radio" name="timing" value="early"><span id="timingEarly">Był za wcześnie</span></label>
-        <label class="choice"><input type="radio" name="timing" value="late"><span id="timingLate">Był za późno</span></label>
-        <label class="choice"><input type="radio" name="timing" value="unclear"><span id="timingUnclear">Komunikat był niejasny</span></label>
-        <label class="choice"><input type="radio" name="timing" value="technical"><span id="timingTechnical">Problem techniczny</span></label>
+      <div id="gameResultQuestions">
+        <h2 id="achievementQuestion">1. Czy osiągnięcie się odblokowało?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="achievement" value="yes"><span id="achYes">Tak</span></label>
+          <label class="choice"><input type="radio" name="achievement" value="no"><span id="achNo">Nie</span></label>
+          <label class="choice"><input type="radio" name="achievement" value="unknown"><span id="achUnknown">Jeszcze nie wiem</span></label>
+          <label class="choice"><input type="radio" name="achievement" value="na"><span id="achNa">Nie dotyczy — test techniczny</span></label>
+        </div>
+        <h2 style="margin-top:22px" id="timingQuestion">2. Jak zadziałał alert?</h2>
+        <div class="result-options">
+          <label class="choice"><input type="radio" name="timing" value="right"><span id="timingRight">Trafił w moment</span></label>
+          <label class="choice"><input type="radio" name="timing" value="early"><span id="timingEarly">Był za wcześnie</span></label>
+          <label class="choice"><input type="radio" name="timing" value="late"><span id="timingLate">Był za późno</span></label>
+          <label class="choice"><input type="radio" name="timing" value="unclear"><span id="timingUnclear">Komunikat był niejasny</span></label>
+          <label class="choice"><input type="radio" name="timing" value="technical"><span id="timingTechnical">Problem techniczny</span></label>
+        </div>
       </div>
       <label class="label" id="notesLabel" for="notes">Co poprawić? (opcjonalnie)</label>
       <textarea class="field" id="notes" maxlength="600" placeholder="Np. sygnał był za cichy albo nie wiedziałem, kiedy nacisnąć punkt kontrolny."></textarea>
@@ -130,13 +157,126 @@
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-const STORE='polaris-session-mvp-v1',REPORTS='polaris-session-reports-v1';
+const STORE='polaris-session-mvp-v2',REPORTS='polaris-session-reports-v2';
 const C={
-  pl:{brandSub:'Mobilny test alertów podczas gry',back:'← Wróć do Polaris',backHref:'index.html',setupEyebrow:'Wersja testowa 0.1',setupTitle:'Telefon pilnuje momentu. Ty grasz.',setupIntro:'Wybierz zadanie, zostaw tę stronę otwartą obok siebie i potwierdź maksymalnie dwa punkty kontrolne. Polaris ostrzeże Cię dźwiękiem i wyraźnym ekranem.',manualBadge:'RĘCZNY PROTOTYP',phoneBadge:'TELEFON OBOK GRACZA',honesty:'<b>Uczciwie:</b> ta wersja nie rozpoznaje jeszcze obrazu z Xboxa. To Ty potwierdzasz etap jednym kliknięciem. Testujemy, czy alert pojawia się w dobrym momencie i faktycznie pomaga.',chooseTitle:'1. Wybierz scenariusz',scenarioLabel:'Zadanie lub test',accountLabel:'Na jakim koncie testujesz?',accountTest:'Konto testowe — osiągnięcie niezdobyte',accountMain:'Konto główne',accountDemo:'Tylko demonstracja — bez sprawdzania osiągnięcia',signalsTitle:'2. Sprawdź sygnał',signalsIntro:'Zrób to przed rozpoczęciem gry. Ustaw głośność telefonu tak, żeby sygnał był słyszalny obok telewizora.',sound:'Dźwięk',notTested:'Jeszcze nieprzetestowany',tested:'Działa — jeśli go usłyszałeś',vibration:'Wibracje',vibrationYes:'Obsługiwane przez przeglądarkę',vibrationNo:'Niedostępne — użyję dźwięku i ekranu',screen:'Ekran',wakeYes:'Można spróbować utrzymać aktywny',wakeNo:'Zostaw telefon odblokowany',testSignal:'♪ Test dźwięku i ekranu',testAlert:'⚠ Pokaż próbny alert',soundToggle:'Dźwięk alertu',vibrationToggle:'Wibracja, jeśli telefon ją obsługuje',wakeToggle:'Nie wygaszaj ekranu podczas sesji',iphone:'<b>Ważne na iPhonie:</b> przeglądarka zwykle nie udostępnia wibracji stronie internetowej. Dlatego podstawą testu jest dźwięk i pełnoekranowe ostrzeżenie. Telefon powinien zostać odblokowany, a ta karta widoczna.',start:'Rozpocznij sesję gry',live:'Sesja aktywna',activeManual:'TEST RĘCZNY',activeHeading:'Graj normalnie',activeIntro:'Sięgaj po telefon tylko wtedy, gdy dotrzesz do opisanego punktu. Nie musisz pilnować czasu.',wakeActive:'Ekran powinien pozostać aktywny. Jeśli telefon go wygasi, odblokuj go i wróć do tej strony.',wakeInactive:'Nie udało się zablokować wygaszania. Zostaw telefon odblokowany i tę stronę na ekranie.',checkpoint:'Punkt kontrolny',pressWhen:'Naciśnij dopiero, gdy to będzie prawdą:',firstDone:'Pierwszy punkt zapisany. Odłóż telefon i graj dalej.',alertDelivered:'Alert został pokazany. Wróć do gry i sprawdź, czy osiągnięcie się odblokuje.',finish:'Zakończ test i zapisz wynik',cancel:'Przerwij sesję',resultEyebrow:'Wynik prawdziwego testu',resultTitle:'Czy Polaris faktycznie pomógł?',resultIntro:'Zapisujemy dwie osobne rzeczy: wynik w grze oraz opinię o samym alercie. Dzięki temu nie pomylimy błędu aplikacji z błędnym warunkiem osiągnięcia.',achievementQuestion:'1. Czy osiągnięcie się odblokowało?',achYes:'Tak',achNo:'Nie',achUnknown:'Jeszcze nie wiem',achNa:'Nie dotyczy — test techniczny',timingQuestion:'2. Jak zadziałał alert?',timingRight:'Trafił w moment',timingEarly:'Był za wcześnie',timingLate:'Był za późno',timingUnclear:'Komunikat był niejasny',timingTechnical:'Problem techniczny',notesLabel:'Co poprawić? (opcjonalnie)',notesPlaceholder:'Np. sygnał był za cichy albo nie wiedziałem, kiedy nacisnąć punkt kontrolny.',saveReport:'Zapisz raport testu',saved:'<b>Gotowe.</b> Raport został zapisany na tym telefonie.',reportTitle:'Raport do wysłania',share:'Udostępnij / skopiuj raport',newTest:'Nowy test',alertEyebrow:'Polaris ostrzega',solution:'Pokaż rozwiązanie — zawiera spoiler',hideSolution:'Ukryj rozwiązanie',ack:'Rozumiem — wracam do gry',copied:'Raport skopiowany.',signalToast:'Jeśli usłyszałeś sygnał i zobaczyłeś błysk, telefon jest gotowy.',previewHeadline:'To tylko próba — niczego nie przegapiłeś',previewMessage:'Tak będzie wyglądać ostrzeżenie podczas gry.',previewSolution:'W próbnym alercie nie ma rozwiązania ani spoilera.',accountNames:{test:'konto testowe',main:'konto główne',demo:'demonstracja'},achievementNames:{yes:'TAK',no:'NIE',unknown:'JESZCZE NIE WIEM',na:'NIE DOTYCZY'},timingNames:{right:'W DOBRYM MOMENCIE',early:'ZA WCZEŚNIE',late:'ZA PÓŹNO',unclear:'NIEJASNY KOMUNIKAT',technical:'PROBLEM TECHNICZNY'},reportLabels:{title:'POLARIS — RAPORT TESTU',scenario:'Scenariusz',account:'Konto',duration:'Czas sesji',achievement:'Osiągnięcie odblokowane',alert:'Ocena alertu',notes:'Uwagi',signals:'Sygnały',date:'Data'}},
-  en:{brandSub:'Mobile in-game alert test',back:'← Back to Polaris',backHref:'index-en.html',setupEyebrow:'Test version 0.1',setupTitle:'Your phone watches the moment. You play.',setupIntro:'Choose a quest, leave this page open beside you, and confirm no more than two checkpoints. Polaris will warn you with sound and a clear full-screen alert.',manualBadge:'MANUAL PROTOTYPE',phoneBadge:'PHONE BESIDE THE PLAYER',honesty:'<b>Honestly:</b> this version does not yet read the Xbox screen. You confirm each stage with one tap. We are testing whether the warning appears at the right moment and actually helps.',chooseTitle:'1. Choose a scenario',scenarioLabel:'Quest or test',accountLabel:'Which account are you testing?',accountTest:'Test account — achievement not unlocked',accountMain:'Main account',accountDemo:'Demonstration only — no achievement check',signalsTitle:'2. Check the signal',signalsIntro:'Do this before playing. Set the phone volume high enough to hear the signal next to the TV.',sound:'Sound',notTested:'Not tested yet',tested:'Working — if you heard it',vibration:'Vibration',vibrationYes:'Supported by this browser',vibrationNo:'Unavailable — sound and screen will be used',screen:'Screen',wakeYes:'Polaris can try to keep it awake',wakeNo:'Keep the phone unlocked',testSignal:'♪ Test sound and screen',testAlert:'⚠ Show a sample alert',soundToggle:'Alert sound',vibrationToggle:'Vibration, when supported',wakeToggle:'Keep screen awake during the session',iphone:'<b>Important on iPhone:</b> web pages usually cannot use vibration. Sound and the full-screen warning are therefore the primary signals. Keep the phone unlocked with this page visible.',start:'Start game session',live:'Session active',activeManual:'MANUAL TEST',activeHeading:'Play normally',activeIntro:'Reach for the phone only when the described checkpoint is true. You do not need to watch a timer.',wakeActive:'The screen should stay awake. If it turns off, unlock the phone and return to this page.',wakeInactive:'Screen lock could not be prevented. Keep the phone unlocked with this page visible.',checkpoint:'Checkpoint',pressWhen:'Tap only when this is true:',firstDone:'First checkpoint saved. Put the phone down and keep playing.',alertDelivered:'The warning was shown. Return to the game and check whether the achievement unlocks.',finish:'Finish test and save result',cancel:'Cancel session',resultEyebrow:'Real test result',resultTitle:'Did Polaris actually help?',resultIntro:'We save two separate facts: the in-game result and your opinion of the warning. This keeps an app problem separate from an incorrect achievement condition.',achievementQuestion:'1. Did the achievement unlock?',achYes:'Yes',achNo:'No',achUnknown:'I do not know yet',achNa:'Not applicable — technical test',timingQuestion:'2. How did the alert work?',timingRight:'Right moment',timingEarly:'Too early',timingLate:'Too late',timingUnclear:'Message was unclear',timingTechnical:'Technical problem',notesLabel:'What should be improved? (optional)',notesPlaceholder:'For example: the signal was too quiet or I did not know when to tap the checkpoint.',saveReport:'Save test report',saved:'<b>Done.</b> The report was saved on this phone.',reportTitle:'Report to send',share:'Share / copy report',newTest:'New test',alertEyebrow:'Polaris warning',solution:'Show solution — contains a spoiler',hideSolution:'Hide solution',ack:'Understood — back to the game',copied:'Report copied.',signalToast:'If you heard the signal and saw the flash, the phone is ready.',previewHeadline:'This is only a test — you missed nothing',previewMessage:'This is how the warning will look during play.',previewSolution:'The sample warning has no solution or spoiler.',accountNames:{test:'test account',main:'main account',demo:'demonstration'},achievementNames:{yes:'YES',no:'NO',unknown:'NOT SURE YET',na:'NOT APPLICABLE'},timingNames:{right:'RIGHT MOMENT',early:'TOO EARLY',late:'TOO LATE',unclear:'UNCLEAR MESSAGE',technical:'TECHNICAL PROBLEM'},reportLabels:{title:'POLARIS — TEST REPORT',scenario:'Scenario',account:'Account',duration:'Session time',achievement:'Achievement unlocked',alert:'Alert rating',notes:'Notes',signals:'Signals',date:'Date'}}
+  pl:{
+    brandSub:'Mobilny test alertów podczas gry',back:'← Wróć do Polaris',backHref:'index.html',
+    setupEyebrow:'Wersja testowa 0.2',setupTitle:'Telefon pilnuje momentu. Ty grasz.',
+    setupIntro:'Wybierz zadanie, zostaw tę stronę otwartą obok siebie i potwierdź maksymalnie dwa punkty kontrolne. Polaris ostrzeże Cię dźwiękiem i wyraźnym ekranem.',
+    manualBadge:'RĘCZNY PROTOTYP',phoneBadge:'TELEFON OBOK GRACZA',
+    honesty:'<b>Uczciwie:</b> ta wersja nie rozpoznaje jeszcze obrazu z Xboxa. To Ty potwierdzasz etap jednym kliknięciem. Testujemy, czy alert pojawia się w dobrym momencie i faktycznie pomaga.',
+    chooseTitle:'1. Wybierz scenariusz',scenarioLabel:'Zadanie lub test',accountLabel:'Na jakim koncie testujesz?',
+    accountTest:'Konto testowe — osiągnięcie niezdobyte',accountMain:'Konto główne',accountDemo:'Tylko demonstracja — bez sprawdzania osiągnięcia',
+    signalsTitle:'2. Sprawdź sygnał',signalsIntro:'Zrób to przed rozpoczęciem gry. Ustaw głośność telefonu tak, żeby sygnał był słyszalny obok telewizora.',
+    sound:'Dźwięk',notTested:'Jeszcze nieprzetestowany',tested:'Test uruchomiony — wynik potwierdzisz na końcu',
+    vibration:'Wibracje',vibrationYes:'Funkcja dostępna w przeglądarce',vibrationNo:'Funkcja niedostępna — użyję dźwięku i ekranu',
+    screen:'Ekran',wakeYes:'Funkcja blokady wygaszania dostępna',wakeNo:'Brak blokady — zostaw telefon odblokowany',
+    testSignal:'♪ Test dźwięku i ekranu',testAlert:'⚠ Pokaż próbny alert',soundToggle:'Dźwięk alertu',
+    vibrationToggle:'Wibracja, jeśli telefon ją obsługuje',wakeToggle:'Nie wygaszaj ekranu podczas sesji',
+    iphone:'<b>Ważne na iPhonie:</b> przeglądarka zwykle nie udostępnia wibracji stronie internetowej. Dlatego podstawą testu jest dźwięk i pełnoekranowe ostrzeżenie. Telefon powinien zostać odblokowany, a ta karta widoczna.',
+    start:'Rozpocznij sesję gry',live:'Sesja aktywna',activeManual:'TEST RĘCZNY',activeHeading:'Graj normalnie',
+    activeIntro:'Sięgaj po telefon tylko wtedy, gdy dotrzesz do opisanego punktu. Nie musisz pilnować czasu.',
+    wakeActive:'Blokada wygaszania została uruchomiona. Ekran powinien pozostać aktywny.',
+    wakeInactive:'Blokada wygaszania nie działa. Zostaw telefon odblokowany i tę stronę na ekranie.',
+    wakeDisabled:'Blokada wygaszania jest wyłączona. Zostaw telefon odblokowany.',
+    checkpoint:'Punkt kontrolny',pressWhen:'Naciśnij dopiero, gdy to będzie prawdą:',
+    firstDone:'Pierwszy punkt zapisany. Odłóż telefon i graj dalej.',
+    alertDelivered:'Alert został pokazany. Wróć do gry i sprawdź, czy osiągnięcie się odblokuje.',
+    phoneAlertDelivered:'Test alertu zakończony. Teraz odpowiedz na cztery krótkie pytania.',
+    finish:'Zakończ test i zapisz wynik',phoneFinish:'Oceń alert',cancel:'Przerwij sesję',
+    resultEyebrow:'Wynik prawdziwego testu',resultTitle:'Czy Polaris faktycznie pomógł?',
+    resultIntro:'Zapisujemy osobno wynik w grze i opinię o alercie. Dzięki temu nie pomylimy błędu aplikacji z błędnym warunkiem osiągnięcia.',
+    phoneResultEyebrow:'Wynik testu telefonu',phoneResultTitle:'Czy alert był jednoznaczny?',
+    phoneResultIntro:'Odpowiedz na cztery krótkie pytania. Raport rozdzieli ustawienia telefonu od tego, co faktycznie usłyszałeś i poczułeś.',
+    achievementQuestion:'1. Czy osiągnięcie się odblokowało?',achYes:'Tak',achNo:'Nie',achUnknown:'Jeszcze nie wiem',achNa:'Nie dotyczy — test techniczny',
+    timingQuestion:'2. Jak zadziałał alert?',timingRight:'Trafił w moment',timingEarly:'Był za wcześnie',timingLate:'Był za późno',
+    timingUnclear:'Komunikat był niejasny',timingTechnical:'Problem techniczny',
+    phoneSoundQuestion:'1. Czy usłyszałeś dźwięk alertu?',soundHeardYes:'Tak',soundHeardNo:'Nie — mimo że był włączony',soundHeardOff:'Nie testowano — dźwięk wyłączony',
+    phoneClarityQuestion:'2. Czy od razu było jasne, że to tylko test?',understoodTestYes:'Tak',understoodTestNo:'Nie',
+    phoneNextActionQuestion:'3. Czy wiedziałeś, co zrobić dalej?',nextActionYes:'Tak',nextActionNo:'Nie',
+    phoneVibrationQuestion:'4. Czy telefon zawibrował?',vibrationObservedYes:'Tak',vibrationObservedNo:'Nie — mimo że była włączona',
+    vibrationObservedOff:'Nie testowano — wyłączona',vibrationObservedUnavailable:'Niedostępna na tym urządzeniu',
+    notesLabel:'Co poprawić? (opcjonalnie)',notesPlaceholder:'Np. sygnał był za cichy albo nie wiedziałem, co zrobić po alercie.',
+    saveReport:'Zapisz raport testu',saved:'<b>Gotowe.</b> Raport został zapisany na tym telefonie.',
+    reportTitle:'Raport do wysłania',share:'Udostępnij / skopiuj raport',newTest:'Nowy test',
+    alertEyebrow:'Polaris ostrzega',phoneAlertEyebrow:'TEST ALERTU POLARIS',previewEyebrow:'PRÓBNY ALERT POLARIS',
+    solution:'Pokaż rozwiązanie — zawiera spoiler',hideSolution:'Ukryj rozwiązanie',
+    ack:'Rozumiem — wracam do gry',ackPhone:'Rozumiem — oceń alert',ackPreview:'Zamknij próbny alert',
+    copied:'Raport skopiowany.',signalToast:'Test został uruchomiony. Na końcu potwierdzisz osobno, czy usłyszałeś dźwięk.',
+    previewHeadline:'TO TYLKO PRÓBA — niczego nie przegapiłeś',
+    previewMessage:'Sprawdzasz wygląd alertu. Zamknij go i wróć do konfiguracji testu.',
+    accountNames:{test:'konto testowe',main:'konto główne',demo:'demonstracja'},
+    achievementNames:{yes:'TAK',no:'NIE',unknown:'JESZCZE NIE WIEM',na:'NIE DOTYCZY'},
+    timingNames:{right:'W DOBRYM MOMENCIE',early:'ZA WCZEŚNIE',late:'ZA PÓŹNO',clear:'JASNY KOMUNIKAT',unclear:'NIEJASNY KOMUNIKAT',technical:'PROBLEM TECHNICZNY'},
+    soundObservedNames:{yes:'TAK',no:'NIE — MIMO ŻE BYŁ WŁĄCZONY',off:'NIE TESTOWANO — WYŁĄCZONY'},
+    vibrationObservedNames:{yes:'TAK',no:'NIE — MIMO ŻE BYŁA WŁĄCZONA',off:'NIE TESTOWANO — WYŁĄCZONA',unavailable:'NIEDOSTĘPNA NA TYM URZĄDZENIU'},
+    booleanNames:{yes:'TAK',no:'NIE'},wakeRunNames:{yes:'TAK',no:'NIE',notRequested:'NIE WŁĄCZONO'},
+    reportLabels:{title:'POLARIS — RAPORT TESTU',scenario:'Scenariusz',account:'Konto',duration:'Czas sesji',
+      achievement:'Osiągnięcie odblokowane',alert:'Ocena alertu',soundObserved:'Dźwięk usłyszany',
+      vibrationObserved:'Wibracja odczuwalna',understoodTest:'Tester wiedział, że to test',
+      nextAction:'Tester wiedział, co zrobić dalej',settings:'Ustawienia',capabilities:'Obsługa urządzenia',
+      wakeAcquired:'Blokada wygaszania uruchomiona',notes:'Uwagi',date:'Data'}
+  },
+  en:{
+    brandSub:'Mobile in-game alert test',back:'← Back to Polaris',backHref:'index-en.html',
+    setupEyebrow:'Test version 0.2',setupTitle:'Your phone watches the moment. You play.',
+    setupIntro:'Choose a quest, leave this page open beside you, and confirm no more than two checkpoints. Polaris will warn you with sound and a clear full-screen alert.',
+    manualBadge:'MANUAL PROTOTYPE',phoneBadge:'PHONE BESIDE THE PLAYER',
+    honesty:'<b>Honestly:</b> this version does not yet read the Xbox screen. You confirm each stage with one tap. We are testing whether the warning appears at the right moment and actually helps.',
+    chooseTitle:'1. Choose a scenario',scenarioLabel:'Quest or test',accountLabel:'Which account are you testing?',
+    accountTest:'Test account — achievement not unlocked',accountMain:'Main account',accountDemo:'Demonstration only — no achievement check',
+    signalsTitle:'2. Check the signal',signalsIntro:'Do this before playing. Set the phone volume high enough to hear the signal next to the TV.',
+    sound:'Sound',notTested:'Not tested yet',tested:'Test played — confirm what you heard at the end',
+    vibration:'Vibration',vibrationYes:'Feature available in this browser',vibrationNo:'Feature unavailable — sound and screen will be used',
+    screen:'Screen',wakeYes:'Screen wake-lock feature available',wakeNo:'No wake lock — keep the phone unlocked',
+    testSignal:'♪ Test sound and screen',testAlert:'⚠ Show a sample alert',soundToggle:'Alert sound',
+    vibrationToggle:'Vibration, when supported',wakeToggle:'Keep screen awake during the session',
+    iphone:'<b>Important on iPhone:</b> web pages usually cannot use vibration. Sound and the full-screen warning are therefore the primary signals. Keep the phone unlocked with this page visible.',
+    start:'Start game session',live:'Session active',activeManual:'MANUAL TEST',activeHeading:'Play normally',
+    activeIntro:'Reach for the phone only when the described checkpoint is true. You do not need to watch a timer.',
+    wakeActive:'Screen wake lock was acquired. The screen should remain active.',
+    wakeInactive:'Screen wake lock is not active. Keep the phone unlocked with this page visible.',
+    wakeDisabled:'Screen wake lock is off. Keep the phone unlocked.',
+    checkpoint:'Checkpoint',pressWhen:'Tap only when this is true:',firstDone:'First checkpoint saved. Put the phone down and keep playing.',
+    alertDelivered:'The warning was shown. Return to the game and check whether the achievement unlocks.',
+    phoneAlertDelivered:'The alert test is complete. Answer four short questions now.',
+    finish:'Finish test and save result',phoneFinish:'Rate the alert',cancel:'Cancel session',
+    resultEyebrow:'Real test result',resultTitle:'Did Polaris actually help?',
+    resultIntro:'We save the in-game result and alert feedback separately. This keeps an app problem separate from an incorrect achievement condition.',
+    phoneResultEyebrow:'Phone test result',phoneResultTitle:'Was the alert unambiguous?',
+    phoneResultIntro:'Answer four short questions. The report will separate phone settings from what you actually heard and felt.',
+    achievementQuestion:'1. Did the achievement unlock?',achYes:'Yes',achNo:'No',achUnknown:'I do not know yet',achNa:'Not applicable — technical test',
+    timingQuestion:'2. How did the alert work?',timingRight:'Right moment',timingEarly:'Too early',timingLate:'Too late',
+    timingUnclear:'Message was unclear',timingTechnical:'Technical problem',
+    phoneSoundQuestion:'1. Did you hear the alert sound?',soundHeardYes:'Yes',soundHeardNo:'No — although it was enabled',soundHeardOff:'Not tested — sound was off',
+    phoneClarityQuestion:'2. Was it immediately clear that this was only a test?',understoodTestYes:'Yes',understoodTestNo:'No',
+    phoneNextActionQuestion:'3. Did you know what to do next?',nextActionYes:'Yes',nextActionNo:'No',
+    phoneVibrationQuestion:'4. Did the phone vibrate?',vibrationObservedYes:'Yes',vibrationObservedNo:'No — although it was enabled',
+    vibrationObservedOff:'Not tested — vibration was off',vibrationObservedUnavailable:'Unavailable on this device',
+    notesLabel:'What should be improved? (optional)',notesPlaceholder:'For example: the signal was too quiet or I did not know what to do after the alert.',
+    saveReport:'Save test report',saved:'<b>Done.</b> The report was saved on this phone.',
+    reportTitle:'Report to send',share:'Share / copy report',newTest:'New test',
+    alertEyebrow:'Polaris warning',phoneAlertEyebrow:'POLARIS ALERT TEST',previewEyebrow:'POLARIS SAMPLE ALERT',
+    solution:'Show solution — contains a spoiler',hideSolution:'Hide solution',
+    ack:'Understood — back to the game',ackPhone:'Understood — rate the alert',ackPreview:'Close sample alert',
+    copied:'Report copied.',signalToast:'The test played. At the end, confirm separately whether you heard the sound.',
+    previewHeadline:'THIS IS ONLY A TEST — you missed nothing',
+    previewMessage:'You are checking the alert appearance. Close it and return to test setup.',
+    accountNames:{test:'test account',main:'main account',demo:'demonstration'},
+    achievementNames:{yes:'YES',no:'NO',unknown:'NOT SURE YET',na:'NOT APPLICABLE'},
+    timingNames:{right:'RIGHT MOMENT',early:'TOO EARLY',late:'TOO LATE',clear:'CLEAR MESSAGE',unclear:'UNCLEAR MESSAGE',technical:'TECHNICAL PROBLEM'},
+    soundObservedNames:{yes:'YES',no:'NO — ALTHOUGH ENABLED',off:'NOT TESTED — OFF'},
+    vibrationObservedNames:{yes:'YES',no:'NO — ALTHOUGH ENABLED',off:'NOT TESTED — OFF',unavailable:'UNAVAILABLE ON THIS DEVICE'},
+    booleanNames:{yes:'YES',no:'NO'},wakeRunNames:{yes:'YES',no:'NO',notRequested:'NOT ENABLED'},
+    reportLabels:{title:'POLARIS — TEST REPORT',scenario:'Scenario',account:'Account',duration:'Session time',
+      achievement:'Achievement unlocked',alert:'Alert rating',soundObserved:'Sound heard',
+      vibrationObserved:'Vibration felt',understoodTest:'Tester knew it was a test',
+      nextAction:'Tester knew what to do next',settings:'Settings',capabilities:'Device support',
+      wakeAcquired:'Screen wake lock acquired',notes:'Notes',date:'Date'}
+  }
 };
 const SCENARIOS={
-  phone:{verified:true,title:{pl:'Test telefonu — bez gry',en:'Phone test — no game'},achievement:{pl:'Brak — test techniczny',en:'None — technical test'},description:{pl:'Najpierw sprawdź sam mechanizm. Dwa kliknięcia zasymulują dłuższe zadanie i moment zagrożenia.',en:'Test the mechanism first. Two taps simulate a longer quest and the risky moment.'},checkpoints:[{label:{pl:'Telefon leży obok mnie, ekran jest włączony',en:'The phone is beside me with the screen on'}},{label:{pl:'Chcę zasymulować moment, w którym można coś pominąć',en:'I want to simulate the moment where something can be missed'},alert:{headline:{pl:'Chwila — tutaj łatwo coś pominąć',en:'Wait — this is easy to miss'},message:{pl:'To sygnał testowy. Jeśli go usłyszałeś albo zauważyłeś ekran, mechanizm działa.',en:'This is a test signal. If you heard it or noticed the screen, the mechanism works.'},solution:{pl:'To tylko test techniczny. Nie ma tu rozwiązania ani spoilera.',en:'This is only a technical test. There is no solution or spoiler.'}}}]},
+  phone:{verified:true,title:{pl:'Test telefonu — bez gry',en:'Phone test — no game'},achievement:{pl:'Brak — test techniczny',en:'None — technical test'},description:{pl:'Sprawdź alert bez uruchamiania gry. Dwa kliknięcia potwierdzą gotowość telefonu i uruchomią jednoznaczny komunikat testowy.',en:'Test the alert without launching a game. Two taps confirm the phone is ready and trigger an unambiguous test message.'},checkpoints:[{label:{pl:'Telefon leży obok mnie, ekran jest włączony i głośność jest ustawiona',en:'The phone is beside me, the screen is on, and the volume is set'}},{label:{pl:'Jestem gotowy uruchomić testowy alert Polaris',en:'I am ready to trigger the Polaris test alert'},alert:{eyebrow:{pl:'TEST ALERTU POLARIS',en:'POLARIS ALERT TEST'},headline:{pl:'TO TYLKO TEST — niczego nie przegapiłeś',en:'THIS IS ONLY A TEST — you missed nothing'},message:{pl:'W prawdziwej sesji taki sygnał ostrzeże Cię przed ważnym momentem związanym z osiągnięciem. Teraz zamknij alert i oceń, czy był jasny.',en:'In a real session, this signal will warn you before an important achievement moment. Now close the alert and rate whether it was clear.'},hasSolution:false}}]},
   woodland:{verified:false,title:{pl:'Duch Lasu — scenariusz roboczy',en:'Woodland Spirit — draft scenario'},achievement:{pl:'Duch Lasu',en:'Woodland Spirit'},description:{pl:'Prawdziwy test na nowym koncie. Moment i treść rozwiązania potwierdzimy na nagraniu, zanim uznamy je za gotowy poradnik.',en:'A real test on a new account. The timing and solution will be confirmed on footage before this becomes a final guide.'},checkpoints:[{label:{pl:'Zacząłem zadanie związane z leśnym duchem',en:'I started the quest involving the woodland spirit'}},{label:{pl:'Za chwilę wybieram sposób rozwiązania zadania',en:'I am about to choose how to resolve the quest'},alert:{headline:{pl:'Chwila — tutaj łatwo stracić osiągnięcie',en:'Wait — this choice can cost the achievement'},message:{pl:'Najpierw zrób osobny zapis gry. Dopiero potem podejmij decyzję.',en:'Make a separate manual save before choosing.'},solution:{pl:'Wersja robocza do potwierdzenia w prawdziwym teście: sprawdzamy ścieżkę Svena i walkę z leszym. Nie traktuj tego jeszcze jako finalnej instrukcji.',en:'Draft for a real test: we are checking Sven’s path and the leshen fight. Do not treat this as the final instruction yet.'}}}]}
 };
 let lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('polaris-session-lang')||'pl';
@@ -147,7 +287,35 @@ function readState(){try{return JSON.parse(localStorage.getItem(STORE))}catch{re
 function persist(){localStorage.setItem(STORE,JSON.stringify(state))}
 function setText(id,value,html=false){const el=document.getElementById(id);if(el)html?el.innerHTML=value:el.textContent=value}
 function setLang(next){lang=next;localStorage.setItem('polaris-session-lang',lang);document.documentElement.lang=lang;document.getElementById('plBtn').classList.toggle('active',lang==='pl');document.getElementById('enBtn').classList.toggle('active',lang==='en');applyCopy();renderAll()}
-function applyCopy(){const c=C[lang],pairs={brandSub:'brandSub',backLink:'back',setupEyebrow:'setupEyebrow',setupTitle:'setupTitle',setupIntro:'setupIntro',manualBadge:'manualBadge',phoneBadge:'phoneBadge',chooseTitle:'chooseTitle',scenarioLabel:'scenarioLabel',accountLabel:'accountLabel',accountTest:'accountTest',accountMain:'accountMain',accountDemo:'accountDemo',signalsTitle:'signalsTitle',signalsIntro:'signalsIntro',soundStatusTitle:'sound',vibrationStatusTitle:'vibration',screenStatusTitle:'screen',testSignalBtn:'testSignal',testAlertBtn:'testAlert',soundToggleLabel:'soundToggle',vibrationToggleLabel:'vibrationToggle',wakeToggleLabel:'wakeToggle',startBtn:'start',liveLabel:'live',activeManualBadge:'activeManual',activeHeading:'activeHeading',activeIntro:'activeIntro',alertDelivered:'alertDelivered',finishBtn:'finish',cancelBtn:'cancel',resultEyebrow:'resultEyebrow',resultTitle:'resultTitle',resultIntro:'resultIntro',achievementQuestion:'achievementQuestion',achYes:'achYes',achNo:'achNo',achUnknown:'achUnknown',achNa:'achNa',timingQuestion:'timingQuestion',timingRight:'timingRight',timingEarly:'timingEarly',timingLate:'timingLate',timingUnclear:'timingUnclear',timingTechnical:'timingTechnical',notesLabel:'notesLabel',saveReportBtn:'saveReport',reportTitle:'reportTitle',shareBtn:'share',newTestBtn:'newTest',alertEyebrow:'alertEyebrow',solutionBtn:'solution',ackAlertBtn:'ack'};for(const[id,key]of Object.entries(pairs))setText(id,c[key]);setText('honestyNote',c.honesty,true);setText('iphoneNote',c.iphone,true);setText('savedNotice',c.saved,true);document.getElementById('backLink').href=c.backHref;document.getElementById('notes').placeholder=c.notesPlaceholder;updateCapabilities()}
+function applyCopy(){
+  const c=C[lang],pairs={
+    brandSub:'brandSub',backLink:'back',setupEyebrow:'setupEyebrow',setupTitle:'setupTitle',setupIntro:'setupIntro',
+    manualBadge:'manualBadge',phoneBadge:'phoneBadge',chooseTitle:'chooseTitle',scenarioLabel:'scenarioLabel',
+    accountLabel:'accountLabel',accountTest:'accountTest',accountMain:'accountMain',accountDemo:'accountDemo',
+    signalsTitle:'signalsTitle',signalsIntro:'signalsIntro',soundStatusTitle:'sound',
+    vibrationStatusTitle:'vibration',screenStatusTitle:'screen',testSignalBtn:'testSignal',testAlertBtn:'testAlert',
+    soundToggleLabel:'soundToggle',vibrationToggleLabel:'vibrationToggle',wakeToggleLabel:'wakeToggle',
+    startBtn:'start',liveLabel:'live',activeManualBadge:'activeManual',activeHeading:'activeHeading',
+    activeIntro:'activeIntro',alertDelivered:'alertDelivered',finishBtn:'finish',cancelBtn:'cancel',
+    resultEyebrow:'resultEyebrow',resultTitle:'resultTitle',resultIntro:'resultIntro',
+    achievementQuestion:'achievementQuestion',achYes:'achYes',achNo:'achNo',achUnknown:'achUnknown',achNa:'achNa',
+    timingQuestion:'timingQuestion',timingRight:'timingRight',timingEarly:'timingEarly',timingLate:'timingLate',
+    timingUnclear:'timingUnclear',timingTechnical:'timingTechnical',
+    phoneSoundQuestion:'phoneSoundQuestion',soundHeardYes:'soundHeardYes',soundHeardNo:'soundHeardNo',
+    soundHeardOff:'soundHeardOff',phoneClarityQuestion:'phoneClarityQuestion',
+    understoodTestYes:'understoodTestYes',understoodTestNo:'understoodTestNo',
+    phoneNextActionQuestion:'phoneNextActionQuestion',nextActionYes:'nextActionYes',nextActionNo:'nextActionNo',
+    phoneVibrationQuestion:'phoneVibrationQuestion',vibrationObservedYes:'vibrationObservedYes',
+    vibrationObservedNo:'vibrationObservedNo',vibrationObservedOff:'vibrationObservedOff',
+    vibrationObservedUnavailable:'vibrationObservedUnavailable',notesLabel:'notesLabel',
+    saveReportBtn:'saveReport',reportTitle:'reportTitle',shareBtn:'share',newTestBtn:'newTest',
+    alertEyebrow:'alertEyebrow',solutionBtn:'solution',ackAlertBtn:'ack'
+  };
+  for(const[id,key]of Object.entries(pairs))setText(id,c[key]);
+  setText('honestyNote',c.honesty,true);setText('iphoneNote',c.iphone,true);setText('savedNotice',c.saved,true);
+  document.getElementById('backLink').href=c.backHref;document.getElementById('notes').placeholder=c.notesPlaceholder;
+  updateCapabilities()
+}
 function populateScenarios(){const select=document.getElementById('scenario'),current=state.scenario||'phone';select.innerHTML='';for(const[id,s]of Object.entries(SCENARIOS)){const option=document.createElement('option');option.value=id;option.textContent=t(s.title);select.appendChild(option)}select.value=SCENARIOS[current]?current:'phone';document.getElementById('accountType').value=state.account||'test'}
 function renderScenarioPreview(){const id=document.getElementById('scenario').value,s=SCENARIOS[id];state.scenario=id;persist();document.getElementById('scenarioPreview').innerHTML=`<b>${escapeHtml(t(s.achievement))}</b><br>${escapeHtml(t(s.description))}${s.verified?'':`<div class="badges"><span class="badge danger">${lang==='pl'?'WARUNEK DO POTWIERDZENIA':'CONDITION TO CONFIRM'}</span></div>`}`}
 function updateCapabilities(){const c=C[lang],vibrate='vibrate'in navigator,wake='wakeLock'in navigator;setText('vibrationStatus',vibrate?c.vibrationYes:c.vibrationNo);setText('screenStatus',wake?c.wakeYes:c.wakeNo);if(!vibrate){document.getElementById('vibrationEnabled').checked=false;document.getElementById('vibrationEnabled').disabled=true}else document.getElementById('vibrationEnabled').disabled=false;setText('soundStatus',state.signalTested?c.tested:c.notTested)}
@@ -157,23 +325,147 @@ function flash(){const el=document.getElementById('flash');el.classList.remove('
 function vibrate(){if(document.getElementById('vibrationEnabled').checked&&'vibrate'in navigator)navigator.vibrate([220,90,220,90,340])}
 async function signal(kind='alert'){flash();vibrate();await playTone(kind)}
 async function testSignals(){state.signalTested=true;persist();updateCapabilities();await signal('test');toast(C[lang].signalToast)}
-function previewAlert(){currentAlert={headline:C[lang].previewHeadline,message:C[lang].previewMessage,solution:C[lang].previewSolution,preview:true};openAlert()}
-function openAlert(){setText('alertHeadline',t(currentAlert.headline));setText('alertMessage',t(currentAlert.message));setText('solutionBox',t(currentAlert.solution));document.getElementById('solutionBox').classList.add('hidden');setText('solutionBtn',C[lang].solution);document.getElementById('alertLayer').classList.remove('hidden');signal('alert');document.getElementById('ackAlertBtn').focus()}
+function previewAlert(){
+  currentAlert={eyebrow:C[lang].previewEyebrow,headline:C[lang].previewHeadline,message:C[lang].previewMessage,preview:true,hasSolution:false};
+  openAlert()
+}
+function openAlert(){
+  const c=C[lang],hasSolution=currentAlert.hasSolution!==false&&!!currentAlert.solution;
+  setText('alertEyebrow',t(currentAlert.eyebrow||c.alertEyebrow));
+  setText('alertHeadline',t(currentAlert.headline));setText('alertMessage',t(currentAlert.message));
+  document.getElementById('solutionBtn').classList.toggle('hidden',!hasSolution);
+  document.getElementById('solutionBox').classList.add('hidden');
+  if(hasSolution){setText('solutionBox',t(currentAlert.solution));setText('solutionBtn',c.solution)}
+  setText('ackAlertBtn',currentAlert.preview?c.ackPreview:(state.scenario==='phone'?c.ackPhone:c.ack));
+  document.getElementById('alertLayer').classList.remove('hidden');signal('alert');document.getElementById('ackAlertBtn').focus()
+}
 function toggleSolution(){const box=document.getElementById('solutionBox'),show=box.classList.contains('hidden');box.classList.toggle('hidden',!show);setText('solutionBtn',show?C[lang].hideSolution:C[lang].solution)}
 function acknowledgeAlert(){document.getElementById('alertLayer').classList.add('hidden');if(currentAlert&&!currentAlert.preview){state.alertAcknowledged=true;persist();renderActive()}currentAlert=null}
-async function requestWake(){if(!document.getElementById('wakeEnabled').checked||!('wakeLock'in navigator))return false;try{wakeLock=await navigator.wakeLock.request('screen');wakeLock.addEventListener('release',()=>{wakeLock=null;renderWake()});return true}catch{return false}}
+async function requestWake(){
+  if(!document.getElementById('wakeEnabled').checked||!('wakeLock'in navigator))return false;
+  try{
+    wakeLock=await navigator.wakeLock.request('screen');state.wakeLockAcquired=true;persist();
+    wakeLock.addEventListener('release',()=>{wakeLock=null;renderWake()});return true
+  }catch{return false}
+}
 function releaseWake(){if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null}}
-function renderWake(){const active=!!wakeLock;setText('wakeNotice',active?C[lang].wakeActive:C[lang].wakeInactive);document.getElementById('wakeNotice').className='notice '+(active?'good':'danger')}
-async function beginSession(){state={phase:'active',scenario:document.getElementById('scenario').value,checkpoint:0,startedAt:Date.now(),account:document.getElementById('accountType').value,alertAcknowledged:false,signalTested:state.signalTested||false,settings:{sound:document.getElementById('soundEnabled').checked,vibration:document.getElementById('vibrationEnabled').checked,wake:document.getElementById('wakeEnabled').checked}};persist();await ensureAudio();await requestWake();renderAll()}
-function renderActive(){const s=SCENARIOS[state.scenario]||SCENARIOS.phone,c=C[lang],total=s.checkpoints.length,idx=Math.min(state.checkpoint,total-1);setText('activeScenario',t(s.title));setText('activeAccountBadge',(c.accountNames[state.account]||state.account).toUpperCase());document.getElementById('sessionProgress').style.width=`${Math.min(100,state.checkpoint/total*100)}%`;renderWake();const card=document.getElementById('checkpointCard'),after=document.getElementById('afterAlertCard');if(state.alertAcknowledged){card.classList.add('completed');card.innerHTML=`<div class="checkpoint-number">${c.checkpoint} ${total}/${total}</div><h2>✓ ${escapeHtml(lang==='pl'?'Ostrzeżenie dostarczone':'Warning delivered')}</h2><p class="muted">${escapeHtml(c.alertDelivered)}</p>`;after.classList.remove('hidden');document.getElementById('sessionProgress').style.width='100%';return}after.classList.add('hidden');card.classList.remove('completed');const cp=s.checkpoints[idx];card.innerHTML=`<div class="checkpoint-number">${c.checkpoint} ${idx+1}/${total}</div><h2>${escapeHtml(c.pressWhen)}</h2><p>${escapeHtml(t(cp.label))}</p><button class="primary" type="button" id="checkpointBtn">${escapeHtml(idx===0?(lang==='pl'?'Tak — jestem w tym miejscu':'Yes — I reached this point'):(lang==='pl'?'Tak — pokaż alert':'Yes — show the alert'))}</button>`;document.getElementById('checkpointBtn').onclick=advanceCheckpoint}
+function renderWake(){
+  const active=!!wakeLock,enabled=state.settings?.wake!==false,c=C[lang];
+  setText('wakeNotice',!enabled?c.wakeDisabled:(active?c.wakeActive:c.wakeInactive));
+  document.getElementById('wakeNotice').className='notice '+(active?'good':(enabled?'danger':''))
+}
+async function beginSession(){
+  state={phase:'active',scenario:document.getElementById('scenario').value,checkpoint:0,startedAt:Date.now(),
+    account:document.getElementById('accountType').value,alertAcknowledged:false,signalTested:state.signalTested||false,
+    wakeLockAcquired:false,settings:{sound:document.getElementById('soundEnabled').checked,
+      vibration:document.getElementById('vibrationEnabled').checked,wake:document.getElementById('wakeEnabled').checked}};
+  persist();await ensureAudio();await requestWake();renderAll()
+}
+function renderActive(){
+  const s=SCENARIOS[state.scenario]||SCENARIOS.phone,c=C[lang],phone=state.scenario==='phone';
+  const total=s.checkpoints.length,idx=Math.min(state.checkpoint,total-1),delivered=phone?c.phoneAlertDelivered:c.alertDelivered;
+  setText('activeScenario',t(s.title));setText('activeAccountBadge',(c.accountNames[state.account]||state.account).toUpperCase());
+  setText('alertDelivered',delivered);setText('finishBtn',phone?c.phoneFinish:c.finish);
+  document.getElementById('sessionProgress').style.width=`${Math.min(100,state.checkpoint/total*100)}%`;renderWake();
+  const card=document.getElementById('checkpointCard'),after=document.getElementById('afterAlertCard');
+  if(state.alertAcknowledged){
+    const closedTitle=phone?(lang==='pl'?'Test alertu zakończony':'Alert test complete'):(lang==='pl'?'Ostrzeżenie dostarczone':'Warning delivered');
+    card.classList.add('completed');
+    card.innerHTML=`<div class="checkpoint-number">${c.checkpoint} ${total}/${total}</div><h2>✓ ${escapeHtml(closedTitle)}</h2><p class="muted">${escapeHtml(delivered)}</p>`;
+    after.classList.remove('hidden');document.getElementById('sessionProgress').style.width='100%';return
+  }
+  after.classList.add('hidden');card.classList.remove('completed');const cp=s.checkpoints[idx];
+  const buttonText=phone
+    ?(idx===0?(lang==='pl'?'Tak — telefon jest gotowy':'Yes — the phone is ready'):(lang==='pl'?'Uruchom testowy alert':'Trigger the test alert'))
+    :(idx===0?(lang==='pl'?'Tak — jestem w tym miejscu':'Yes — I reached this point'):(lang==='pl'?'Tak — pokaż alert':'Yes — show the alert'));
+  card.innerHTML=`<div class="checkpoint-number">${c.checkpoint} ${idx+1}/${total}</div><h2>${escapeHtml(c.pressWhen)}</h2><p>${escapeHtml(t(cp.label))}</p><button class="primary" type="button" id="checkpointBtn">${escapeHtml(buttonText)}</button>`;
+  document.getElementById('checkpointBtn').onclick=advanceCheckpoint
+}
 function advanceCheckpoint(){const s=SCENARIOS[state.scenario],cp=s.checkpoints[state.checkpoint];state.checkpoint+=1;persist();if(cp.alert){currentAlert={...cp.alert,preview:false};openAlert()}else{toast(C[lang].firstDone);renderActive()}}
 function finishSession(){state.phase='result';state.finishedAt=Date.now();persist();releaseWake();renderAll()}
 function cancelSession(){if(!confirm(lang==='pl'?'Przerwać tę sesję? Wynik nie zostanie zapisany.':'Cancel this session? No result will be saved.'))return;resetSession()}
-function saveReport(event){event.preventDefault();const data=new FormData(event.currentTarget),report={id:`test-${Date.now()}`,date:new Date().toISOString(),scenario:state.scenario,scenarioTitle:t(SCENARIOS[state.scenario].title),account:state.account,startedAt:state.startedAt,finishedAt:state.finishedAt||Date.now(),durationSec:Math.max(0,Math.round(((state.finishedAt||Date.now())-state.startedAt)/1000)),achievement:data.get('achievement'),timing:data.get('timing'),notes:document.getElementById('notes').value.trim(),signals:{sound:!!state.settings?.sound,vibration:!!state.settings?.vibration&&'vibrate'in navigator,wakeLockSupported:'wakeLock'in navigator},prototype:'manual-v0.1'};let all=[];try{all=JSON.parse(localStorage.getItem(REPORTS))||[]}catch{}all.unshift(report);localStorage.setItem(REPORTS,JSON.stringify(all.slice(0,20)));lastReport=formatReport(report);state.phase='saved';state.lastReport=report;persist();renderAll()}
-function formatReport(r){const c=C[lang],l=c.reportLabels;return`${l.title}\n${l.date}: ${new Date(r.date).toLocaleString(lang==='pl'?'pl-PL':'en-GB')}\n${l.scenario}: ${r.scenarioTitle}\n${l.account}: ${c.accountNames[r.account]||r.account}\n${l.duration}: ${formatDuration(r.durationSec)}\n${l.achievement}: ${c.achievementNames[r.achievement]||r.achievement}\n${l.alert}: ${c.timingNames[r.timing]||r.timing}\n${l.signals}: sound=${r.signals.sound?'on':'off'}, vibration=${r.signals.vibration?'on':'off'}, wake-lock=${r.signals.wakeLockSupported?'supported':'unsupported'}\n${l.notes}: ${r.notes||'—'}\nprototype=${r.prototype}`}
+function setGroupRequired(name,enabled){
+  const inputs=[...document.querySelectorAll(`input[name="${name}"]`)];
+  inputs.forEach(input=>input.required=false);if(enabled&&inputs[0])inputs[0].required=true
+}
+function setDefaultChoice(name,value){
+  if(!document.querySelector(`input[name="${name}"]:checked`)){
+    const input=document.querySelector(`input[name="${name}"][value="${value}"]`);if(input)input.checked=true
+  }
+}
+function configureResultQuestions(){
+  const c=C[lang],phone=state.scenario==='phone';
+  document.getElementById('phoneResultQuestions').classList.toggle('hidden',!phone);
+  document.getElementById('gameResultQuestions').classList.toggle('hidden',phone);
+  for(const name of ['heardSound','understoodTest','knewNextAction','vibrationObserved'])setGroupRequired(name,phone);
+  for(const name of ['achievement','timing'])setGroupRequired(name,!phone);
+  setText('resultEyebrow',phone?c.phoneResultEyebrow:c.resultEyebrow);
+  setText('resultTitle',phone?c.phoneResultTitle:c.resultTitle);
+  setText('resultIntro',phone?c.phoneResultIntro:c.resultIntro);
+  if(phone){
+    if(!state.settings?.sound)setDefaultChoice('heardSound','off');
+    if(!('vibrate'in navigator))setDefaultChoice('vibrationObserved','unavailable');
+    else if(!state.settings?.vibration)setDefaultChoice('vibrationObserved','off')
+  }
+}
+function saveReport(event){
+  event.preventDefault();const data=new FormData(event.currentTarget),phone=state.scenario==='phone';
+  const observations=phone?{
+    sound:data.get('heardSound'),understoodTest:data.get('understoodTest'),
+    knewNextAction:data.get('knewNextAction'),vibration:data.get('vibrationObserved')
+  }:null;
+  const alertRating=phone
+    ?(observations.understoodTest==='yes'&&observations.knewNextAction==='yes'?'clear':'unclear')
+    :data.get('timing');
+  const report={id:`test-${Date.now()}`,date:new Date().toISOString(),scenario:state.scenario,
+    scenarioTitle:t(SCENARIOS[state.scenario].title),account:state.account,startedAt:state.startedAt,
+    finishedAt:state.finishedAt||Date.now(),
+    durationSec:Math.max(0,Math.round(((state.finishedAt||Date.now())-state.startedAt)/1000)),
+    achievement:phone?'na':data.get('achievement'),timing:alertRating,observations,
+    settings:{sound:!!state.settings?.sound,vibration:!!state.settings?.vibration,wake:!!state.settings?.wake},
+    capabilities:{vibrationSupported:'vibrate'in navigator,wakeLockSupported:'wakeLock'in navigator},
+    runtime:{signalTestStarted:!!state.signalTested,wakeLockAcquired:!!state.wakeLockAcquired,
+      alertAcknowledged:!!state.alertAcknowledged},
+    notes:document.getElementById('notes').value.trim(),prototype:'manual-v0.2'};
+  let all=[];try{all=JSON.parse(localStorage.getItem(REPORTS))||[]}catch{}
+  all.unshift(report);localStorage.setItem(REPORTS,JSON.stringify(all.slice(0,20)));
+  lastReport=formatReport(report);state.phase='saved';state.lastReport=report;persist();renderAll()
+}
+function formatReport(r){
+  const c=C[lang],l=c.reportLabels,on=value=>value?'on':'off',support=value=>value?'supported':'unsupported';
+  const lines=[l.title,`${l.date}: ${new Date(r.date).toLocaleString(lang==='pl'?'pl-PL':'en-GB')}`,
+    `${l.scenario}: ${r.scenarioTitle}`,`${l.account}: ${c.accountNames[r.account]||r.account}`,
+    `${l.duration}: ${formatDuration(r.durationSec)}`,
+    `${l.achievement}: ${c.achievementNames[r.achievement]||r.achievement}`,
+    `${l.alert}: ${c.timingNames[r.timing]||r.timing}`];
+  if(r.observations){
+    lines.push(`${l.soundObserved}: ${c.soundObservedNames[r.observations.sound]||r.observations.sound}`);
+    lines.push(`${l.vibrationObserved}: ${c.vibrationObservedNames[r.observations.vibration]||r.observations.vibration}`);
+    lines.push(`${l.understoodTest}: ${c.booleanNames[r.observations.understoodTest]||r.observations.understoodTest}`);
+    lines.push(`${l.nextAction}: ${c.booleanNames[r.observations.knewNextAction]||r.observations.knewNextAction}`)
+  }
+  lines.push(`${l.settings}: sound=${on(r.settings.sound)}, vibration=${on(r.settings.vibration)}, wake-lock=${on(r.settings.wake)}`);
+  lines.push(`${l.capabilities}: vibration=${support(r.capabilities.vibrationSupported)}, wake-lock=${support(r.capabilities.wakeLockSupported)}`);
+  const wakeRun=!r.settings.wake?'notRequested':(r.runtime.wakeLockAcquired?'yes':'no');
+  lines.push(`${l.wakeAcquired}: ${c.wakeRunNames[wakeRun]}`);
+  lines.push(`${l.notes}: ${r.notes||'—'}`,`prototype=${r.prototype}`);return lines.join('\n')
+}
 async function shareReport(){const text=lastReport||document.getElementById('reportText').textContent;try{if(navigator.share)await navigator.share({title:C[lang].reportLabels.title,text});else{await navigator.clipboard.writeText(text);toast(C[lang].copied)}}catch(e){if(e.name!=='AbortError'){try{await navigator.clipboard.writeText(text);toast(C[lang].copied)}catch{}}}}
-function resetSession(){releaseWake();state={phase:'setup',scenario:state.scenario||'phone',checkpoint:0,startedAt:null,account:state.account||'test',alertAcknowledged:false,signalTested:state.signalTested||false};persist();document.getElementById('resultForm').reset();renderAll();scrollTo({top:0,behavior:'smooth'})}
-function renderAll(){for(const id of ['setupView','activeView','resultView','savedView'])document.getElementById(id).classList.add('hidden');const phase=['setup','active','result','saved'].includes(state.phase)?state.phase:'setup';document.getElementById(`${phase}View`).classList.remove('hidden');if(phase==='setup'){populateScenarios();renderScenarioPreview()}if(phase==='active'){if(state.settings){document.getElementById('soundEnabled').checked=state.settings.sound;document.getElementById('vibrationEnabled').checked=state.settings.vibration&&'vibrate'in navigator;document.getElementById('wakeEnabled').checked=state.settings.wake}renderActive();startTimer()}else stopTimer();if(phase==='saved'){lastReport=formatReport(state.lastReport);setText('reportText',lastReport)}}
+function resetSession(){releaseWake();state={phase:'setup',scenario:state.scenario||'phone',checkpoint:0,startedAt:null,account:state.account||'test',alertAcknowledged:false,signalTested:state.signalTested||false,wakeLockAcquired:false};persist();document.getElementById('resultForm').reset();renderAll();scrollTo({top:0,behavior:'smooth'})}
+function renderAll(){
+  for(const id of ['setupView','activeView','resultView','savedView'])document.getElementById(id).classList.add('hidden');
+  const phase=['setup','active','result','saved'].includes(state.phase)?state.phase:'setup';
+  document.getElementById(`${phase}View`).classList.remove('hidden');
+  if(phase==='setup'){populateScenarios();renderScenarioPreview()}
+  if(phase==='active'){
+    if(state.settings){document.getElementById('soundEnabled').checked=state.settings.sound;
+      document.getElementById('vibrationEnabled').checked=state.settings.vibration&&'vibrate'in navigator;
+      document.getElementById('wakeEnabled').checked=state.settings.wake}
+    renderActive();startTimer()
+  }else stopTimer();
+  if(phase==='result')configureResultQuestions();
+  if(phase==='saved'){lastReport=formatReport(state.lastReport);setText('reportText',lastReport)}
+}
 function startTimer(){stopTimer();updateTimer();timerId=setInterval(updateTimer,1000)}function stopTimer(){if(timerId)clearInterval(timerId);timerId=null}function updateTimer(){if(!state.startedAt)return;setText('timer',formatDuration(Math.round((Date.now()-state.startedAt)/1000)))}function formatDuration(sec){const m=Math.floor(sec/60),s=sec%60;return`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`}
 function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('on');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('on'),3200)}
 function escapeHtml(value){return String(value).replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
