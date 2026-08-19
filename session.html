@@ -433,8 +433,9 @@ function saveReport(event){
 }
 function formatReport(r){
   const c=C[lang],l=c.reportLabels,on=value=>value?'on':'off',support=value=>value?'supported':'unsupported';
+  const scenarioTitle=SCENARIOS[r.scenario]?t(SCENARIOS[r.scenario].title):r.scenarioTitle;
   const lines=[l.title,`${l.date}: ${new Date(r.date).toLocaleString(lang==='pl'?'pl-PL':'en-GB')}`,
-    `${l.scenario}: ${r.scenarioTitle}`,`${l.account}: ${c.accountNames[r.account]||r.account}`,
+    `${l.scenario}: ${scenarioTitle}`,`${l.account}: ${c.accountNames[r.account]||r.account}`,
     `${l.duration}: ${formatDuration(r.durationSec)}`,
     `${l.achievement}: ${c.achievementNames[r.achievement]||r.achievement}`,
     `${l.alert}: ${c.timingNames[r.timing]||r.timing}`];
